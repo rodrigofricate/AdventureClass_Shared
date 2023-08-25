@@ -106,25 +106,28 @@ public class PlayerActionsHandgun : MonoBehaviour
     }
     #endregion
 
+
     void MoveChar()
     {
         float _horizontal = input.GetHorizontalAxis();
         float _vertical = input.GetVerticalAxis();
 
-        Vector3 moveDirection = new Vector3(_horizontal, 0, _vertical);
-        characterController.SimpleMove(moveDirection * moveSpeed);
-
         animator.SetFloat("XAxis", _horizontal, 0.1f, Time.deltaTime);
         animator.SetFloat("YAxis", _vertical, 0.1f, Time.deltaTime);
 
+     
         //Rotation
-        animator.SetFloat("InputMagnetude", moveDirection.magnitude);
-        if (moveDirection.magnitude > 0)
-        {
-            Quaternion rotation = Quaternion.LookRotation(moveDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeeed);
-
+        float mouseXAxis = Input.GetAxis("Mouse X");
+        transform.Rotate(Vector3.up, mouseXAxis * Time.deltaTime * 800);
+        if(_vertical != 0)
+        {        
+           characterController.SimpleMove(transform.forward  * moveSpeed * _vertical);
         }
+        if(_horizontal != 0)
+        {
+            characterController.SimpleMove(transform.right * moveSpeed * _horizontal);
+        }
+
 
     }
 }

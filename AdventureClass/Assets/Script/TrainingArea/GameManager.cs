@@ -7,10 +7,14 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     InputManager inputManager;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        if (Instance == null) { Instance = this; }
+        inputManager = GetComponent<InputManager>();
+    }
     void Start()
     {
-        if(Instance == null){ Instance = this; }
-        inputManager = GetComponent<InputManager>();
+       
 
     }
 
