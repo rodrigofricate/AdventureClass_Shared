@@ -52,3 +52,13 @@ Update Mode: mergeDefaultDependencies
 
 The following packages were added:
   com.unity.postprocessing@3.2.2
+
+=== Tue Aug 29 10:25:17 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.collab-proxy from version 2.0.4 to 2.0.5
+  com.unity.ide.rider from version 3.0.21 to 3.0.24
+  com.unity.test-framework from version 1.1.31 to 1.1.33

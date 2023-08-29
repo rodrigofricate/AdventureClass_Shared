@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 8096}
   vertical: 0
-  controlID: 6400
+  controlID: 85
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -222,8 +222,8 @@ MonoBehaviour:
     y: 0
     width: 306.40002
     height: 730.8
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -601,9 +601,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.16958086, y: -0.7038761, z: 0.1792209, w: 0.6660936}
   m_Size:
-    m_Target: 0.026165212
+    m_Target: 0.02973805
     speed: 2
-    m_Value: 0.026165212
+    m_Value: 0.02973805
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -810,23 +810,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 2c610000
+      m_SelectedIDs: beb40000
       m_LastClickedID: 0
-      m_ExpandedIDs: fee0ffff66f6ffff6af6ffffbef6ffffc2f6ffffc6f6ffffcaf6ffff3af7ffff3ef7ffff42f7ffff6ef7ffff86f7ffffeefaffffc45a0000
+      m_ExpandedIDs: 6cf9ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: UsedAmmo(Clone)
-        m_OriginalName: UsedAmmo(Clone)
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -25210
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 7}
       m_SearchString: 
@@ -899,8 +899,6 @@ MonoBehaviour:
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
-    m_VersionControlStates: []
-    m_SoftLockControlStates: []
     m_ReferencingInstanceIDs: 
     m_SceneHandles: 
     m_ShowAllHits: 0
@@ -910,6 +908,7 @@ MonoBehaviour:
     - Assets/Imported Assets/1911 Pistol/Prefabs
     m_Globs: []
     m_OriginalText: 
+    m_FilterByTypeIntersection: 0
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -921,7 +920,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: a26d0000
     m_LastClickedID: 28066
-    m_ExpandedIDs: ffffffff00000000265f0000285f00002a5f00002c5f00002e5f0000305f0000325f0000345f0000365f0000385f00003a5f00003c5f00003e5f0000425f0000445f0000465f0000485f00004a5f00004c5f00004e5f0000505f0000965f00009a5f0000c25f0000c85f000062630000
+    m_ExpandedIDs: 00000000122300007423000080230000ee230000949d00004eb4000050b4000052b4000054b4000056b4000058b400005ab400005cb400005eb4000060b4000062b4000064b4000066b4000068b400006ab400006cb400006eb4000070b4000072b4000074b4000076b40000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -949,21 +948,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 232.20001}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000265f0000285f00002a5f00002c5f00002e5f0000305f0000325f0000345f0000365f0000385f00003a5f00003c5f00003e5f0000425f0000445f0000465f0000485f00004a5f00004c5f00004e5f0000505f0000965f00009a5f0000c25f0000c85f000062630000
+    m_ExpandedIDs: ffffffff00000000122300007423000080230000ee230000949d00004eb4000050b4000052b4000054b4000056b4000058b400005ab400005cb400005eb4000060b4000062b4000064b4000066b4000068b400006ab400006cb400006eb4000070b4000072b4000074b4000076b40000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: UsedAmmo
-      m_OriginalName: UsedAmmo
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 24552
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 8}
     m_SearchString: 
