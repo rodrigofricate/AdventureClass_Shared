@@ -71,7 +71,6 @@ public class PlayerActionsHandgun : MonoBehaviour
         //Rotação vertical
         float mouseYAxis = Input.GetAxis("Mouse Y");
         float verticalRotation = mouseYAxis * verticalSpeed * Time.deltaTime;
-        Debug.Log(mouseYAxis);
         VerticalCameraRotation(verticalRotation);
 
 

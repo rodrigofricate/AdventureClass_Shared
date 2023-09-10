@@ -16,6 +16,5 @@ public class Decal : MonoBehaviour
         {
             Destroy( this.gameObject );
         }
-        Debug.Log( lifeSpan );
     }
 }

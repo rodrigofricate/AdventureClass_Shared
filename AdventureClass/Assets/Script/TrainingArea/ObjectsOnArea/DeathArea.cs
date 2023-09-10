@@ -10,7 +10,7 @@ public class DeathArea : MonoBehaviour
         if (other.CompareTag("Player"))
         {
 
-            other.gameObject.GetComponent<PlayerActions>().Death();
+            other.gameObject.GetComponent<TankPlayerActions>().Death();
         }
     }
 }

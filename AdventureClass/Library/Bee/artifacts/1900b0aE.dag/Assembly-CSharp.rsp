@@ -369,11 +369,8 @@
 "Assets/Script/TrainingArea/PlayerInputHandgun/Handgun.cs"
 "Assets/Script/TrainingArea/PlayerInputHandgun/PlayerActionsHandgun.cs"
 "Assets/Script/TrainingArea/PlayerInputHandgun/UsedAmmo.cs"
-"Assets/Script/TrainingArea/PlayerInputsA/PlayerActions.cs"
-"Assets/Script/TrainingArea/PlayerInputsA/PlayerCamera.cs"
-"Assets/Script/TrainingArea/PlayerInputsB/PlayerActionsB.cs"
-"Assets/Script/TrainingArea/PlayerInputsB/PlayerCameraB.cs"
-"Assets/Script/TrainingArea/PlayerInputsC/PlayerActionsC.cs"
+"Assets/Script/TrainingArea/TankPlayerActions/TankPlayerActions.cs"
+"Assets/Script/TrainingArea/TankPlayerActions/TankPlayerCamera.cs"
 -langversion:9.0
 
 /deterministic

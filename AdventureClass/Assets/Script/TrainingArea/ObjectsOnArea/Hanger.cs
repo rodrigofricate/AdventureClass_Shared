@@ -11,7 +11,7 @@ public class Hanger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-                other.gameObject.GetComponent<PlayerActions>().StartHang(hangTranform);
+                other.gameObject.GetComponent<TankPlayerActions>().StartHang(hangTranform);
             
         }
     }
