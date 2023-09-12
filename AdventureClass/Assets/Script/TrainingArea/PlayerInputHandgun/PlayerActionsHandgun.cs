@@ -41,6 +41,7 @@ public class PlayerActionsHandgun : MonoBehaviour
        
         MoveChar();
     }
+
     #region Código Antigo
 
 

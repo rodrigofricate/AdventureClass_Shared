@@ -14,11 +14,17 @@ public class Handgun : MonoBehaviour
     [SerializeField] Image crosshair;
     [SerializeField] float fireImpact;
     float weaponRange = 100;
-   
+   public delegate void Ponteiro(string texto);
+    Ponteiro ponteiro;
    
 
     // Start is called before the first frame update
-
+    void Start()
+    {
+        ponteiro += PassaMsg;
+        ponteiro += PassaMsg;
+        ponteiro.Invoke("Fui!");
+    }
     // Update is called once per frame
     void Update()
     {
@@ -93,5 +99,9 @@ public class Handgun : MonoBehaviour
         _usedAmmo.transform.rotation = rot;
         Destroy(_usedAmmo, 3.0f);
 
+    }
+    void PassaMsg(string texto)
+    {
+        Debug.Log(texto.ToString());
     }
 }
