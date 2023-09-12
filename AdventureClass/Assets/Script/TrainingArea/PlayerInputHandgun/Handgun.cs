@@ -34,9 +34,12 @@ public class Handgun : MonoBehaviour
             DropUsedAmmo();
             if (target.transform.CompareTag("Enemy"))
             {
+              if(target.transform.gameObject.TryGetComponent(out Rigidbody _rb))
+                {
+                    _rb.AddForce(-target.normal * fireImpact, ForceMode.Impulse);
+                    Destroy(target.transform.gameObject, 2.0f);
+                }
               
-                target.rigidbody.AddForce(-target.normal * fireImpact, ForceMode.Impulse);
-                Destroy(target.transform.gameObject, 2.0f);
             }
             else
             {

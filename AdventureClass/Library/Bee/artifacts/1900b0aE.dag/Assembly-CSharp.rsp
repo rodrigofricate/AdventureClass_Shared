@@ -361,6 +361,7 @@
 "Assets/Script/Test/DelegateBoss.cs"
 "Assets/Script/Test/DelegateExemple.cs"
 "Assets/Script/Test/DelegateMob.cs"
+"Assets/Script/TrainingArea/EnemyTargetSpace/WarZombieBehavior.cs"
 "Assets/Script/TrainingArea/GameManager.cs"
 "Assets/Script/TrainingArea/InputManager.cs"
 "Assets/Script/TrainingArea/ObjectsOnArea/DeathArea.cs"
