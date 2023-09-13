@@ -357,6 +357,7 @@
 "Assets/Imported Assets/UnityTechnologies/ParticlePack/Shared/Scripts/SimpleCharacterMotor.cs"
 "Assets/Imported Assets/UnityTechnologies/ParticlePack/TutorialInfo/Scripts/Readme.cs"
 "Assets/Script/Enums/EnumPlayerActionState.cs"
+"Assets/Script/Enums/EnumZombieActionState.cs"
 "Assets/Script/Test/ActionsExemple.cs"
 "Assets/Script/Test/DelegateBoss.cs"
 "Assets/Script/Test/DelegateExemple.cs"

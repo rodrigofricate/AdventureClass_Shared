@@ -79,6 +79,7 @@ public class PlayerActionsHandgun : MonoBehaviour
         transform.Rotate(Vector3.up, mouseXAxis * Time.deltaTime * 800);
         if (_vertical != 0)
         {
+
             characterController.SimpleMove(transform.forward * moveSpeed * _vertical);
         }
         if (_horizontal != 0)

@@ -1,3 +1,4 @@
 Base path: 'D:/RodrigoStudios/Aplicativos/Unity/Editors/2021.3.29f1/Editor/Data', plugins path 'D:/RodrigoStudios/Aplicativos/Unity/Editors/2021.3.29f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
 
+Cmd: shutdown
