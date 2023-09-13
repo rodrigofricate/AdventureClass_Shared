@@ -989,7 +989,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.45
   m_Height: 1.9887757
   m_Direction: 1
   m_Center: {x: 0, y: 1.0268703, z: 0}
@@ -1002,12 +1002,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 892955430}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.6
+  m_Radius: 0.5
   m_Speed: 1
   m_Acceleration: 30
   avoidancePriority: 50
   m_AngularSpeed: 400
-  m_StoppingDistance: 2
+  m_StoppingDistance: 1.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -1036,7 +1036,8 @@ MonoBehaviour:
   - {fileID: 1381951419}
   - {fileID: 1306965249}
   - {fileID: 128053175}
-  chaseStartDistance: 5
+  chaseStartDistance: 6
+  attackDistance: 1.3
 --- !u!54 &892955436
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2302,6 +2303,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7292624139691532889, guid: 1b40e7edf3885864e8c5ad0714cfba4e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b38fc93b09b16b6408aefb71b1cf3121, type: 2}
     - target: {fileID: 7292624139691532889, guid: 1b40e7edf3885864e8c5ad0714cfba4e, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
