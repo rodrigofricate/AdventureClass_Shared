@@ -22,36 +22,42 @@ public class Handgun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckTarget();
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+      
+        CrossHair(ray);
+        Shot(ray);
     }
 
-    void Shot(RaycastHit target)
+    void Shot(Ray ray)
     {
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject _shotFX = Instantiate(handgunPointerParticles, handgunPointer.position, handgunPointer.rotation);
-            Destroy(_shotFX, 1.5f);
-            DropUsedAmmo();
-            if (target.transform.CompareTag("Enemy"))
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, weaponRange))
             {
-              if(target.transform.gameObject.TryGetComponent(out Rigidbody _rb))
+                GameObject _shotFX = Instantiate(handgunPointerParticles, handgunPointer.position, handgunPointer.rotation);
+                Destroy(_shotFX, 1.5f);
+                DropUsedAmmo();
+                if (hit.transform.CompareTag("Enemy"))
                 {
-                    _rb.AddForce(-target.normal * fireImpact, ForceMode.Impulse);
-                    Destroy(target.transform.gameObject, 2.0f);
-                }
-              
-            }
-            else
-            {
-                DecalTarget(target);
-               
-            }
+                    if (hit.transform.gameObject.TryGetComponent(out Rigidbody _rb))
+                    {
+                        //_rb.AddForce(-hit.normal * fireImpact, ForceMode.Impulse);
+                        // Destroy(hit.transform.gameObject, 2.0f);
+                        Debug.Log(hit.collider.name);
+                    }
 
+                }
+                else
+                {
+                    DecalTarget(hit);
+
+                }
+            }
         }
     }
-    void CheckTarget()
+    void CrossHair(Ray ray)
     {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, weaponRange))
         {
@@ -63,7 +69,7 @@ public class Handgun : MonoBehaviour
             {
                 crosshair.color = Color.white;
             }
-            Shot(hit);
+          
 
 
         }
