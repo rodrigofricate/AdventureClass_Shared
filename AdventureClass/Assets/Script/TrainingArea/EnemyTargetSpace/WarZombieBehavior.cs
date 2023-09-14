@@ -1,6 +1,7 @@
 using Assets.Script.Enums;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -37,7 +38,7 @@ public class WarZombieBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player == null){ Debug.LogError("Player Nulo!"); return; }
+        if (player == null) { Debug.LogError("Player Nulo!"); return; }
         float _distance = Vector3.Distance(transform.position, player.transform.position);
         StateMannager(_distance);
         if (zombieActionState == EnumZombieActionState.Patrol)
@@ -67,21 +68,26 @@ public class WarZombieBehavior : MonoBehaviour
     void ChasePlayer()
     {
 
-            animator.SetFloat("Move", 1.0f, 0.06f, Time.deltaTime);
-            animator.speed = 1.5f;
-            navMeshAgent.speed = 2.5f;
-            navMeshAgent.SetDestination(player.transform.position);
-        
+        animator.SetFloat("Move", 1.0f, 0.06f, Time.deltaTime);
+        animator.speed = 1.5f;
+        navMeshAgent.speed = 2.5f;
+        navMeshAgent.SetDestination(player.transform.position);
+
     }
     void AttackPlayer()
     {
-            animator.SetTrigger("Attack");           
-            navMeshAgent.speed = 0.0f;
+
+        Vector3 _direction = player.transform.position - transform.position;
+        Vector3 _rotationTowards = Vector3.RotateTowards(transform.forward, _direction, 1.0f * Time.deltaTime, 0.0f);
+        transform.rotation = Quaternion.LookRotation(_rotationTowards);
+
+        animator.SetTrigger("Attack");
+        navMeshAgent.speed = 0.0f;
     }
     void PatrolArea()
     {
         currentWaitingTime += Time.deltaTime;
-        if(currentWaitingTime>= waitingTime)
+        if (currentWaitingTime >= waitingTime)
         {
             currentWaitingTime = 0;
             navMeshAgent.SetDestination(waypoint[index].position);
@@ -97,13 +103,23 @@ public class WarZombieBehavior : MonoBehaviour
         if (distance > chaseStartDistance)
         {
             zombieActionState = EnumZombieActionState.Patrol;
-        }else if (distance <= chaseStartDistance && distance > attackDistance)
+        }
+        else if (distance <= chaseStartDistance && distance > attackDistance)
         {
             zombieActionState = EnumZombieActionState.ChasingPlayer;
-        }else if (distance<=attackDistance)
+        }
+        else if (distance <= attackDistance)
         {
             zombieActionState = EnumZombieActionState.AttackPlayer;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, chaseStartDistance);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackDistance);
     }
 }
 
