@@ -10,7 +10,9 @@ namespace Assets.Script.Enums
     {
         Patrol,
         ChasingPlayer,
+        AngryChasingPlayer,
         AttackPlayer,
+        Death,
         Null,
 
     }

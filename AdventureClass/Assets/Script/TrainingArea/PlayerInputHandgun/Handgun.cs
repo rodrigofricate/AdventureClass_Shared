@@ -13,17 +13,22 @@ public class Handgun : MonoBehaviour
     [SerializeField] Transform handgunPointer;
     [SerializeField] Image crosshair;
     [SerializeField] float fireImpact;
+    float noiseRange = 10;
+    float weaponDamange = 1;
     float weaponRange = 100;
-   
-   
+
+
 
     // Start is called before the first frame update
-
+    private void Start()
+    {
+        Debug.Log("Hangun player=> " + gameObject.name);
+    }
     // Update is called once per frame
     void Update()
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-      
+
         CrossHair(ray);
         Shot(ray);
     }
@@ -32,19 +37,23 @@ public class Handgun : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            GameObject _shotFX = Instantiate(handgunPointerParticles, handgunPointer.position, handgunPointer.rotation);
+            Destroy(_shotFX, 1.5f);
+            NoiseAlertEnemies();
+            DropUsedAmmo();
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, weaponRange))
             {
-                GameObject _shotFX = Instantiate(handgunPointerParticles, handgunPointer.position, handgunPointer.rotation);
-                Destroy(_shotFX, 1.5f);
-                DropUsedAmmo();
+
                 if (hit.transform.CompareTag("Enemy"))
                 {
-                    if (hit.transform.gameObject.TryGetComponent(out Rigidbody _rb))
+                    if (hit.collider.name == "HeadTarget")
                     {
-                        //_rb.AddForce(-hit.normal * fireImpact, ForceMode.Impulse);
-                        // Destroy(hit.transform.gameObject, 2.0f);
-                        Debug.Log(hit.collider.name);
+                        hit.collider.gameObject.GetComponentInParent<WarZombieBehavior>().TakeDamange(999);
+                    }
+                    else
+                    {
+                        hit.collider.gameObject.GetComponentInParent<WarZombieBehavior>().TakeDamange(weaponDamange);
                     }
 
                 }
@@ -69,9 +78,6 @@ public class Handgun : MonoBehaviour
             {
                 crosshair.color = Color.white;
             }
-          
-
-
         }
 
     }
@@ -81,26 +87,49 @@ public class Handgun : MonoBehaviour
         {
             GameObject[] decalsOnWorld = GameObject.FindGameObjectsWithTag("Decal");
             if (decalsOnWorld.Length > 4) { Destroy(decalsOnWorld[0]); }
+
             GameObject _decal = Instantiate(decal);
             _decal.transform.position = target.point;
             _decal.transform.forward = target.normal * -1;
             _decal.transform.position -= transform.forward * 0.001f;
             GameObject _decalFX = Instantiate(decalPaticles, _decal.transform.transform.position, _decal.transform.rotation);
+
             Destroy(_decalFX, 0.5f);
         }
     }
     void DropUsedAmmo()
     {
         GameObject _usedAmmo = Instantiate(ammo);
-      
         _usedAmmo.transform.position = ammoExitPointer.transform.position;
+        _usedAmmo.GetComponent<Rigidbody>().AddForce(Vector3.up / 5.0f, ForceMode.Impulse);
 
-        
-        _usedAmmo.GetComponent<Rigidbody>().AddForce(Vector3.up/5.0f,ForceMode.Impulse);
         Quaternion rot = ammoExitPointer.transform.rotation;
         rot.eulerAngles += new Vector3(0, 90, 0);
         _usedAmmo.transform.rotation = rot;
+
         Destroy(_usedAmmo, 3.0f);
 
+    }
+    void NoiseAlertEnemies()
+    {
+        GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in Enemies)
+        {
+            float _distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (_distance<=noiseRange)
+            {
+                if (enemy.TryGetComponent(out WarZombieBehavior zombie))
+                {
+                    zombie.Alert();
+                }
+            }
+           
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, noiseRange);
     }
 }

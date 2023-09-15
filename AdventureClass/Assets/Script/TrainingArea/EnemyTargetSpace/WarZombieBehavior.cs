@@ -8,6 +8,9 @@ using UnityEngine.AI;
 public class WarZombieBehavior : MonoBehaviour
 {
     [SerializeField] EnumZombieActionState zombieActionState = EnumZombieActionState.Patrol;
+    [SerializeField] float maximumHealthPoints;
+    float currentHealthPoint;
+    [SerializeField] GameObject deadBody;
     //Patrol
     [Header("Patrulha")]
     [SerializeField] float waitingTime;
@@ -20,7 +23,9 @@ public class WarZombieBehavior : MonoBehaviour
     [SerializeField] float chaseStartDistance;
     [Header("Atacar Jogador")]
     [SerializeField] float attackDistance;
-
+    [Header("Body Parts")]
+    [SerializeField] Transform headOfModel;
+    [SerializeField] Transform headCollider;
 
 
     NavMeshAgent navMeshAgent;
@@ -29,31 +34,38 @@ public class WarZombieBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Physics.IgnoreLayerCollision(10, 11);
+
+        currentHealthPoint = maximumHealthPoints;
+        index = Random.Range(0, waypoint.Length);
+
         player = GameObject.FindGameObjectWithTag("Player");
         navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        index = Random.Range(0, waypoint.Length);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        BodyColliderUpdater();
+
         if (player == null) { Debug.LogError("Player Nulo!"); return; }
         float _distance = Vector3.Distance(transform.position, player.transform.position);
+       
         StateMannager(_distance);
-        if (zombieActionState == EnumZombieActionState.Patrol)
-        {
-            navMeshAgent.speed = 1.0f;
-            animator.SetFloat("Move", Mathf.Clamp(navMeshAgent.velocity.sqrMagnitude, 0, 0.5f), 0.06f, Time.deltaTime);
-            animator.speed = 1.0f;
-        }
-
         switch (zombieActionState)
         {
+            case EnumZombieActionState.Death:
+                Death();
+                break;
             case EnumZombieActionState.Patrol:
                 PatrolArea();
                 break;
             case EnumZombieActionState.ChasingPlayer:
+                ChasePlayer();
+                break;
+            case EnumZombieActionState.AngryChasingPlayer:
                 ChasePlayer();
                 break;
             case EnumZombieActionState.AttackPlayer:
@@ -61,10 +73,34 @@ public class WarZombieBehavior : MonoBehaviour
                 break;
         }
 
-
     }
 
+    void StateMannager(float distance)
+    {
+        if (currentHealthPoint <= 0)
+        {
+            zombieActionState = EnumZombieActionState.Death;
+            return;
+        }
 
+        if ( currentHealthPoint < maximumHealthPoints || zombieActionState == EnumZombieActionState.AngryChasingPlayer)
+        {
+            zombieActionState = EnumZombieActionState.AngryChasingPlayer;
+        }
+        else if (distance > chaseStartDistance)
+        {
+            zombieActionState = EnumZombieActionState.Patrol;
+        }
+        else if (distance <= chaseStartDistance && distance > attackDistance)
+        {
+            zombieActionState = EnumZombieActionState.ChasingPlayer;
+        }
+
+        if (distance <= attackDistance)
+        {
+            zombieActionState = EnumZombieActionState.AttackPlayer;
+        }
+    }
     void ChasePlayer()
     {
 
@@ -98,28 +134,31 @@ public class WarZombieBehavior : MonoBehaviour
         animator.SetFloat("Move", Mathf.Clamp(navMeshAgent.velocity.sqrMagnitude, 0, 0.5f), 0.06f, Time.deltaTime);
         animator.speed = 1.0f;
     }
-    void StateMannager(float distance)
+   
+    void BodyColliderUpdater()
     {
-        if (distance > chaseStartDistance)
-        {
-            zombieActionState = EnumZombieActionState.Patrol;
-        }
-        else if (distance <= chaseStartDistance && distance > attackDistance)
-        {
-            zombieActionState = EnumZombieActionState.ChasingPlayer;
-        }
-        else if (distance <= attackDistance)
-        {
-            zombieActionState = EnumZombieActionState.AttackPlayer;
-        }
-    }
+        headCollider.transform.position = headOfModel.transform.position;
 
+    }
+    void Death()
+    {
+        GameObject _dead = Instantiate(deadBody, transform.position, Quaternion.identity);        
+        Destroy(this.gameObject);
+    }
+    //Gizmo
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, chaseStartDistance);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
+    }
+    //Public
+    public void TakeDamange(float damange) {currentHealthPoint -= damange;}
+    public void Alert()
+    {
+        zombieActionState = EnumZombieActionState.AngryChasingPlayer;
+
     }
 }
 
